@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "com.amazonaws:aws-lambda-java-core:$awsLambdaJavaVersion"
+}
+
+task copyRuntimeDeps(type: Copy) {
+    from configurations.runtimeClasspath
+    into 'build/dependency'
+}
+
+build.dependsOn copyRuntimeDeps
