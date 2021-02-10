@@ -6,6 +6,8 @@ BUILD_ARGS?=
 JAVA_VERSION=11
 AWS_DEFAULT_REGION?=ap-southeast-2
 
+DIAGRAMS=docker run -v "${PWD}:/work" figurate/diagrams python
+
 .PHONY: all build tag push
 
 all: build
@@ -26,3 +28,6 @@ push:
 
 run:
 	docker run --rm -it -p 9000:8080 -e AWS_REGION=$(AWS_DEFAULT_REGION) $(REGISTRY)/$(IMAGE_NAME)
+
+diagram:
+	$(DIAGRAMS) diagram.py
